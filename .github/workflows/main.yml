@@ -23,9 +23,6 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: "${{ env.DOTNET_VERSION }}"
-          
-      - name: Restore
-        run: dotnet restore ${{env.DOTNET_ROOT}}
         
       - name: Build
         run: dotnet build ${{env.DOTNET_ROOT}} --configuration Release --no-restore
