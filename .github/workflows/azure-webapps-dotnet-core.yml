@@ -52,6 +52,7 @@ jobs:
     needs: build
     env:
       ASPNETCORE_ENVIRONMENT: 'Development'
+    environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
