@@ -10,7 +10,7 @@ env:
   AZURE_WEBAPP_NAME: "andres-test"
   AZURE_WEBAPP_PACKAGE_PATH: "./publish"
   DOTNET_VERSION: '6'
-  DOTNET_ROOT:  "./WebApplication1.sln"
+  DOTNET_ROOT:  "./WebApplicationOpenApi.sln"
 
 jobs:
   publish:
