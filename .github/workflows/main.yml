@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-    - main
+    - develop
 
 env:
   AZURE_WEBAPP_NAME: "andres-test"
