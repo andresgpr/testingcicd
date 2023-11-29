@@ -1,0 +1,41 @@
+name: Build Backend Development
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+
+env:
+  AZURE_WEBAPP_NAME: "andres-test"
+  AZURE_WEBAPP_PACKAGE_PATH: "./publish"
+  DOTNET_VERSION: '6'
+  DOTNET_ROOT:  "./WebApplication1.sln"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "${{ env.DOTNET_VERSION }}"
+          
+      - name: Restore
+        run: dotnet restore ${{env.DOTNET_ROOT}}
+        
+      - name: Build
+        run: dotnet build ${{env.DOTNET_ROOT}} --configuration Release --no-restore
+        
+      - name: Publish
+        run: dotnet publish ${{env.DOTNET_ROOT}} --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        
+      - name: Deployment
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
