@@ -50,6 +50,9 @@ jobs:
       contents: none
     runs-on: ubuntu-latest
     needs: build
+    env:
+     ASPNETCORE_ENVIRONMENT: 'Development'
+     DONET_ENVIRONMENT: 'Development'
     environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
